@@ -1,0 +1,6 @@
+Metric Name,Category,Observed Value,Numerator / Denominator,Formula,Grain,Strategic Intent
+Severe Late Delivery Rate (>10m),Outcome,22.78%,349 / 1532 delivered orders,Count(delay_min > 10m) / Count(delivered_orders),Order level,Primary outcome: Target high-churn delivery failures destroying customer retention
+Customer Anxiety Velocity,Interaction,1.39 views / order,2217 ETA views / 1600 placed orders,Sum(ETA_VIEWED actions) / Count(placed_orders),Order level,Leading indicator: Early-warning proxy for perceived customer friction
+Intervention Coverage Rate,Intervention,26.88%,430 / 1600 placed orders,Count(orders with intervention > 0) / Count(placed_orders),Order level,Operational lever: Measure dispatch reach across active delivery workflows
+Support Escalation Rate,Interaction,18.31%,293 / 1600 placed orders,Count(support_opened == 1) / Count(placed_orders),Order level,Cost & friction proxy: Quantifies unmanaged delays turning into support overhead
+Intervention Rescue Success Rate,Intervention,42.93%,176 / 410 intervened delivered,Count(intervened & late_flag == 0) / Count(intervened delivered),Order level,Operational efficiency: Measure proportion of intervened orders saved from SLA breach

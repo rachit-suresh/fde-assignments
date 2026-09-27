@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "rules_evaluated": 6,
+  "gates": {
+    "gate_1_pk_uniqueness": {
+      "table": "orders",
+      "total_rows": 1603,
+      "unique_keys": 1600,
+      "duplicates_removed": 3,
+      "passed": true
+    },
+    "gate_2_temporal_monotonicity": {
+      "table": "orders",
+      "anomalies_detected": 1,
+      "details": [
+        "5 orders have delivery_at earlier than pickup_at"
+      ],
+      "passed": false
+    },
+    "gate_3_domain_normalization": {
+      "table": "order_outcomes",
+      "distinct_statuses": [
+        "delivered",
+        "cancelled"
+      ],
+      "unexpected_statuses": [],
+      "passed": true
+    },
+    "gate_4_referential_integrity": {
+      "customer_app_actions": {
+        "total_child_orders": 1100,
+        "orphaned_orders_count": 0,
+        "passed": true
+      },
+      "support_tickets": {
+        "total_child_orders": 198,
+        "orphaned_orders_count": 0,
+        "passed": true
+      },
+      "order_interventions": {
+        "total_child_orders": 430,
+        "orphaned_orders_count": 0,
+        "passed": true
+      },
+      "order_outcomes": {
+        "total_child_orders": 1600,
+        "orphaned_orders_count": 0,
+        "passed": true
+      }
+    },
+    "gate_5_sla_delay_consistency": {
+      "delivered_orders_audited": 754,
+      "delay_mismatches_gt_6sec": 0,
+      "late_flag_logical_mismatches": 0,
+      "passed": true
+    },
+    "gate_6_quarantine_summary": {
+      "total_anomalies_quarantined": 1,
+      "status": "HEALTHY - NON-CRITICAL WARNINGS PROFILED"
+    }
+  },
+  "anomalies": [
+    {
+      "gate": "Gate 1: Primary Key Uniqueness",
+      "issue": "3 duplicate rows found in orders table",
+      "impacted_order_ids": [
+        "O00120",
+        "O00723",
+        "O01302"
+      ],
+      "total_impacted_keys": 3,
+      "remediation": "Deduplicated keeping the first observed record; raw unmutated table preserved in ingestion."
+    }
+  ]
+}

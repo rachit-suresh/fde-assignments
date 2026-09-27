@@ -1,0 +1,39 @@
+[2026-09-27 23:13:34,800] [INFO] [FlashEatsPipeline] ================================================================================
+[2026-09-27 23:13:34,810] [INFO] [FlashEatsPipeline] STARTING FLASHEATS FDE DATA FOUNDATIONS PIPELINE
+[2026-09-27 23:13:34,810] [INFO] [FlashEatsPipeline] Output Directory: C:\Users\admin\OneDrive\Desktop\CODE\fde\fde-assignments\fde-data-foundations-assignment\outputs
+[2026-09-27 23:13:34,810] [INFO] [FlashEatsPipeline] ================================================================================
+[2026-09-27 23:13:34,810] [INFO] [FlashEatsPipeline] STAGE 1: MULTI-MODAL INGESTION
+[2026-09-27 23:13:34,810] [INFO] [FlashEatsPipeline.Ingest] Initiating multi-modal data ingestion from C:\Users\admin\OneDrive\Desktop\CODE\fde\fde-assignments\flasheats-classroom-pack\database\flasheats.db and C:\Users\admin\OneDrive\Desktop\CODE\fde\fde-assignments\flasheats-classroom-pack\data
+[2026-09-27 23:13:34,841] [INFO] [FlashEatsPipeline.Ingest] Extracted SQL table 'orders': 1603 rows, 13 columns
+[2026-09-27 23:13:34,851] [INFO] [FlashEatsPipeline.Ingest] Extracted SQL table 'customers': 900 rows, 5 columns
+[2026-09-27 23:13:34,851] [INFO] [FlashEatsPipeline.Ingest] Extracted SQL table 'restaurants': 60 rows, 6 columns
+[2026-09-27 23:13:34,860] [INFO] [FlashEatsPipeline.Ingest] Extracted SQL table 'drivers': 120 rows, 4 columns
+[2026-09-27 23:13:34,880] [INFO] [FlashEatsPipeline.Ingest] Ingested CSV file 'customer_app_actions': 2365 rows, 6 columns
+[2026-09-27 23:13:34,890] [INFO] [FlashEatsPipeline.Ingest] Ingested CSV file 'support_tickets': 202 rows, 5 columns
+[2026-09-27 23:13:34,900] [INFO] [FlashEatsPipeline.Ingest] Ingested CSV file 'order_interventions': 430 rows, 6 columns
+[2026-09-27 23:13:34,913] [INFO] [FlashEatsPipeline.Ingest] Ingested CSV file 'order_outcomes': 1600 rows, 6 columns
+[2026-09-27 23:13:34,921] [INFO] [FlashEatsPipeline.Ingest] Ingested CSV file 'restaurant_status': 502 rows, 4 columns
+[2026-09-27 23:13:34,925] [INFO] [FlashEatsPipeline.Ingest] Multi-modal ingestion completed successfully. Total datasets: 9
+[2026-09-27 23:13:34,925] [INFO] [FlashEatsPipeline] Stage 1 Successful: Ingested 9 tables
+[2026-09-27 23:13:34,929] [INFO] [FlashEatsPipeline] STAGE 2: BUSINESS-ORIENTED DATA VALIDATION
+[2026-09-27 23:13:34,929] [INFO] [FlashEatsPipeline.Validate] Executing 6 business-oriented data validation rules...
+[2026-09-27 23:13:34,940] [WARNING] [FlashEatsPipeline.Validate] Gate 1 Warning: Found 3 duplicate order rows across 3 unique order IDs
+[2026-09-27 23:13:35,025] [INFO] [FlashEatsPipeline.Validate] Validation complete: All 6 gates passed with 1 transparently profiled anomalies
+[2026-09-27 23:13:35,029] [INFO] [FlashEatsPipeline] Stage 2 Successful: Validation report written to C:\Users\admin\OneDrive\Desktop\CODE\fde\fde-assignments\fde-data-foundations-assignment\outputs\validation_report.json
+[2026-09-27 23:13:35,033] [INFO] [FlashEatsPipeline] STAGE 3: CANONICAL WORKFLOW MODELING
+[2026-09-27 23:13:35,033] [INFO] [FlashEatsPipeline.Transform] Transforming tables into canonical workflow model...
+[2026-09-27 23:13:36,626] [INFO] [FlashEatsPipeline.Transform] Transformation complete. Mart shape: (1600, 9), Unique orders: 1600
+[2026-09-27 23:13:36,644] [INFO] [FlashEatsPipeline] Stage 3 Successful: Canonical mart written to C:\Users\admin\OneDrive\Desktop\CODE\fde\fde-assignments\fde-data-foundations-assignment\outputs\order_workflow_mart.csv (Shape: (1600, 9))
+[2026-09-27 23:13:36,649] [INFO] [FlashEatsPipeline] STAGE 4: BUSINESS KPI METRICS GENERATION
+[2026-09-27 23:13:36,650] [INFO] [FlashEatsPipeline.Metrics] Computing 5 business metrics linked to Project KPI: REDUCE LATE RATE...
+[2026-09-27 23:13:36,834] [INFO] [FlashEatsPipeline.Metrics] KPI metrics computed: Severe late rate = 22.78%, Rescue success = 42.93%
+[2026-09-27 23:13:36,840] [INFO] [FlashEatsPipeline] Stage 4 Successful: Scorecard written to C:\Users\admin\OneDrive\Desktop\CODE\fde\fde-assignments\fde-data-foundations-assignment\outputs\kpi_metrics_scorecard.csv
+[2026-09-27 23:13:36,840] [INFO] [FlashEatsPipeline] ================================================================================
+[2026-09-27 23:13:36,840] [INFO] [FlashEatsPipeline] PIPELINE COMPLETED SUCCESSFULLY (ALL 4 STAGES PASSED)
+[2026-09-27 23:13:36,840] [INFO] [FlashEatsPipeline] Executive KPI Scorecard Summary:
+[2026-09-27 23:13:36,849] [INFO] [FlashEatsPipeline]   * Severe Late Delivery Rate (>10m)    : 22.78%
+[2026-09-27 23:13:36,849] [INFO] [FlashEatsPipeline]   * Customer Anxiety Velocity           : 1.39 views / order
+[2026-09-27 23:13:36,849] [INFO] [FlashEatsPipeline]   * Intervention Coverage Rate          : 26.88%
+[2026-09-27 23:13:36,858] [INFO] [FlashEatsPipeline]   * Support Escalation Rate             : 18.31%
+[2026-09-27 23:13:36,859] [INFO] [FlashEatsPipeline]   * Intervention Rescue Success Rate    : 42.93%
+[2026-09-27 23:13:36,859] [INFO] [FlashEatsPipeline] ================================================================================
