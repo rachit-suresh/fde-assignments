@@ -143,10 +143,10 @@ To prevent cartesian join fan-out when joining 1:N event streams (app actions, s
 The pipeline executes **6 business-oriented validation gates** and transparently catalogs all anomalies in `outputs/validation_report.json` instead of silently dropping data:
 
 1. **Gate 1 — Primary Key Uniqueness:** Evaluates `orders` table. Identified 3 duplicate rows across 3 unique orders (`total_rows: 1603`, `unique_keys: 1600`). Deduplicated keeping first; logged duplicate keys to anomaly report.
-2. **Gate 2 — Temporal Monotonicity:** Verifies $\text{created\_at} \le \text{pickup\_at} \le \text{actual\_delivery\_at}$. Detected 5 orders where delivery occurred before pickup (recorded as courier logging timestamp anomaly).
+2. **Gate 2 — Temporal Monotonicity:** Verifies `created_at <= pickup_at <= actual_delivery_at`. Detected 5 orders where delivery occurred before pickup (recorded as courier logging timestamp anomaly).
 3. **Gate 3 — Domain Normalization:** Standardized casing across `final_status_norm` (`delivered`, `cancelled`).
 4. **Gate 4 — Referential Integrity:** Verified all foreign keys across `actions`, `tickets`, `interventions`, and `outcomes` map cleanly to the clean 1,600 order spine.
-5. **Gate 5 — SLA Delay Consistency:** Re-calculated physical delay $(\text{delivery\_at} - \text{promised\_eta})$ and verified 100% agreement with `delay_min` and `late_flag`.
+5. **Gate 5 — SLA Delay Consistency:** Re-calculated physical delay `(actual_delivery_at - promised_eta)` in minutes and verified 100% agreement with `delay_min` and `late_flag`.
 6. **Gate 6 — Quarantine Logging:** Generates structured, machine-readable validation audit report (`outputs/validation_report.json`).
 
 ---
@@ -177,7 +177,7 @@ The pipeline produces the canonical evidence scorecard (`outputs/kpi_metrics_sco
 |---|---|
 | **Known** | 1,600 orders placed; 1,532 delivered; 843 late (>0m); 349 severe late (>10m); 430 received operational interventions; 293 contacted support. |
 | **Unknown** | Exact split between kitchen wait time and courier transit time (due to missing `driver_arrived_at_restaurant` telemetry). |
-| **Assumption** | Deliveries exceeding promised ETA by $\le 10$ minutes represent normal urban transit variance; churn is predominantly driven by severe delays ($>10$ minutes). |
+| **Assumption** | Deliveries exceeding promised ETA by <= 10 minutes represent normal urban transit variance; churn is predominantly driven by severe delays (>10 minutes). |
 | **Limitation** | Observational historical data cannot provide counterfactual outcomes (what would have happened if an unmanaged order had received priority dispatch). |
 
 ---
